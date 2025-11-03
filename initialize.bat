@@ -1,5 +1,5 @@
 @echo off
 cd /d "%~dp0"
-call env_PM\Scripts\activate.bat
-set PATH=%PATH%;E:\AI_Projects\PacMan\swigwin
+call env_KFM\Scripts\activate.bat
+set PATH=%PATH%;C:\AI\KungFuMaster-ML\swigwin
 cmd /k
