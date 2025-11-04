@@ -32,9 +32,9 @@ pip install imageio
 pip install IPython
 pip install imageio[ffmpeg]
 pip install imageio[pyav]
+pip install opencv-python
 
 pip install gymnasium[atari]
 
-
-//pip install imageio && pip install IPython && pip install imageio[ffmpeg] && pip install imageio[pyav] && pip install gymnasium[atari]
+//pip install imageio && pip install IPython && pip install imageio[ffmpeg] && pip install imageio[pyav] && pip install opencv-python && pip install gymnasium[atari]
 
