@@ -115,3 +115,14 @@ class Agent():
         self.brain = Network(action_size).to(self.device) # in this case we don't need a local and a target network, just but the one, called now "brain"
         self.optimizer = torch.optim.Adam(self.brain.parameters(), lr = learning_rate)
         
+    def act(self, state):
+        if state.ndim == 3 # dimension of the state. we work with batches of frames, if this state dimension is 3 it means is a single observation, a single 4 grayscale frame buffer. we need to put it in a batch. (a batch of just itself in it though)... I think??
+            state = [state]
+        state = torch.tensor(state, dtype = torch.float32, device = self.device) # make it a Pytorch Tensor from numpy array
+        
+        action_values, _ = self.network(state) # This call the forward() in the network. We don't need the state value yet, so _ for the 2nd param.
+        
+        policy = F.softmax(action_values, dim = -1) # remember policy are the QValues. Calling the softmax function to get the best action. dim = dimentions to apply softmax to. -1 to do it only on the last dimension (aka the output part of the newral network)... I think??
+        
+        return np.array([np.random.choice(len(p), p = p) for p in policy.detach().cpu().numpy()]) # policy is a tensor. detach from the ccomputational grapch (?). move the tensor back to CPU. Convert that tensor into a numpyarray. then choice selects the action with most value from the policy. Do this for each state of the batch
+    
